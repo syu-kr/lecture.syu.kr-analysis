@@ -38,6 +38,8 @@ with open("config.json", "r", encoding = "utf-8") as f:
 REAL_PATH = data_path
 YEARS = os.path.abspath(REAL_PATH)
 
+API = {}
+
 for YEAR in os.listdir(YEARS):
   SEMESTERS = os.path.abspath(YEARS + "\\" + YEAR)
   
@@ -61,13 +63,21 @@ for YEAR in os.listdir(YEARS):
             continue
           
           for DATA in FILE_DATAS["api"]:
-            # if "컴퓨터"  in DATA["학부(과)"]:
-            #   datas.append(DATA["교수명"])
-            if DATA["교수명"] == name:
-              datas.append(DATA["과목명"])
+            if "컴퓨터" in DATA["학부(과)"]:
+              datas.append(DATA["교수명"] + "(" + DATA["학부(과)"] + ")")
+            # if DATA["교수명"] == name:
+            #   datas.append(DATA["과목명"])
     
     if not datas:
       LOGGER.info(YEAR + " " + SEMESTER + " " + RED_TEXT + "분석된 정보가 없습니다." + RESET_TEXT)
     else:
       LOGGER.info(YEAR + " " + SEMESTER + " " + YELLOW_TEXT + ", ".join(list(set(datas))) + RESET_TEXT)
+      
+      API[YEAR + " " + SEMESTER] = []
+      
+      for professor in list(set(datas)):
+        API[YEAR + " " + SEMESTER].append(professor)
+
+with open("professor.json", "w", encoding = "utf-8") as f:
+  json.dump(API, f, ensure_ascii = False, indent = 2)
     
