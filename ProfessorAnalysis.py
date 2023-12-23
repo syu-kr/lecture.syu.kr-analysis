@@ -64,17 +64,7 @@ for YEAR in os.listdir(YEARS):
           
           for DATA in FILE_DATAS["api"]:
             if "컴퓨터" in DATA["학부(과)"]:
-              if DATA["교수명"] == "" or DATA["교수명"] == "미지정":
-                continue
-              
-              if DATA["교수명"] == "금연금주클리닉" or DATA["교수명"] == "교목처":
-                continue
-              
-              if "영어" in DATA["과목명"]:
-                continue
-              
-              datas.append(DATA["교수명"])
-              # datas.append(DATA["교수명"] + "(" + DATA["학부(과)"] + ")")
+              datas.append(DATA["교수명"] + "(" + DATA["학부(과)"] + ")")
             # if DATA["교수명"] == name:
             #   datas.append(DATA["과목명"])
     
