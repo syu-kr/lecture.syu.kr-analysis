@@ -64,7 +64,6 @@ for YEAR in os.listdir(YEARS):
           
           for DATA in FILE_DATAS["api"]:
             if "컴퓨터" in DATA["학부(과)"]:
-              datas.append(DATA["교수명"] + "(" + DATA["학부(과)"] + ")")
               if DATA["교수명"] == "" or DATA["교수명"] == "미지정":
                 continue
 
